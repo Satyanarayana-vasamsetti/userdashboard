@@ -1,65 +1,49 @@
 <div class="container">
-  <h2 class="my-4">Dashboard</h2>
+  <div class="incont">
+    <h2 class="my-4">Dashboard</h2>
 
-  <!-- Search by Email -->
-  <div class="mb-3">
-    <input
-      type="email"
-      placeholder="Search by email"
-      #emailInput
-      class="form-control d-inline w-75"
-    />
-    <button class="btn btn-secondary d-inline w-20" (click)="searchByEmail(emailInput.value)">
-      Search
-    </button>
+    <!-- Search by Email -->
+    <div class="mb-3">
+      <input type="email" placeholder="Search by email" #emailInput class="form-control d-inline w-75" />
+      <button class="btn btn-secondary d-inline w-20" (click)="searchByEmail(emailInput.value)" style="margin-left: 10px;font-weight:bold;">
+        Search
+      </button>
+    </div>
+
+
+
+    <!-- Add/Edit Form -->
+    <form [formGroup]="fg" (ngSubmit)="selectedRecord ? update() : add()">
+      <div class="mb-3">
+        <label for="name" class="form-label">Name</label>
+        <input id="name" type="text" formControlName="username" class="form-control"
+          [ngClass]="{ 'is-invalid': fg.get('username')?.invalid && fg.get('username')?.touched }" />
+        <div *ngIf="fg.get('username')?.invalid && fg.get('username')?.touched" class="invalid-feedback">
+          Name is required (5-20 characters).
+        </div>
+      </div>
+
+
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input id="email" type="email" formControlName="email" class="form-control"
+          [ngClass]="{ 'is-invalid': fg.get('email')?.invalid && fg.get('email')?.touched }" />
+        <div class="invalid-feedback">Valid email is required.</div>
+      </div>
+
+      <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input id="password" type="password" formControlName="password" class="form-control"
+          [ngClass]="{ 'is-invalid': fg.get('password')?.invalid && fg.get('password')?.touched }" />
+        <div class="invalid-feedback">Password is required (8-20 characters).</div>
+      </div>
+
+      <button class="btn btn-primary" type="submit">{{ selectedRecord ? 'Update' : 'Add' }}</button>
+      <button class="btn btn-secondary" type="button" (click)="resetForm()">Reset</button>
+    </form>
   </div>
-  
-  
 
-  <!-- Add/Edit Form -->
-  <form [formGroup]="fg" (ngSubmit)="selectedRecord ? update() : add()">
-    <div class="mb-3">
-      <label for="name" class="form-label">Name</label>
-      <input
-        id="name"
-        type="text"
-        formControlName="username"
-        class="form-control"
-        [ngClass]="{ 'is-invalid': fg.get('name')?.invalid && fg.get('name')?.touched }"
-      />
-      <div class="invalid-feedback">Name is required (5-20 characters).</div>
-    </div>
 
-    <div class="mb-3">
-      <label for="email" class="form-label">Email</label>
-      <input
-        id="email"
-        type="email"
-        formControlName="email"
-        class="form-control"
-        [ngClass]="{ 'is-invalid': fg.get('email')?.invalid && fg.get('email')?.touched }"
-      />
-      <div class="invalid-feedback">Valid email is required.</div>
-    </div>
-
-    <div class="mb-3">
-      <label for="password" class="form-label">Password</label>
-      <input
-        id="password"
-        type="password"
-        formControlName="password"
-        class="form-control"
-        [ngClass]="{ 'is-invalid': fg.get('password')?.invalid && fg.get('password')?.touched }"
-      />
-      <div class="invalid-feedback">Password is required (8-20 characters).</div>
-    </div>
-
-    <button class="btn btn-primary" type="submit">{{ selectedRecord ? 'Update' : 'Add' }}</button>
-    <button class="btn btn-secondary" type="button" (click)="resetForm()">Reset</button>
-  </form>
-
-  
-  
   <!-- Records Table -->
   <table class="table table-hover mt-4">
     <thead>
@@ -79,7 +63,7 @@
         <td>{{ d.password }}</td>
         <td>
           <button class="btn btn-warning" (click)="populateForm(d)">Edit</button>
-          <button class="btn btn-danger" (click)="delete(d.id)">Delete</button>
+          <button class="btn btn-danger" (click)="deleteByEmail(d.email)">Delete</button>
         </td>
       </tr>
     </tbody>
