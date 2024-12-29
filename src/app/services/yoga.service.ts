@@ -7,7 +7,7 @@ import { Yoga } from '../models/yoga';
   providedIn: 'root'
 })
 export class YogaService {
-  private baseurl = "https://sheetdb.io/api/v1/ct97viuxhbhmy";
+  private baseurl = "https://sheetdb.io/api/v1/4bgncevy86kuv";
   constructor(private http:HttpClient) { }
   
   getAll():Observable<any[]>{
