@@ -48,20 +48,23 @@ export class DashboardComponent {
 
   // Delete a record
   delete(id: number | undefined): void {
+    console.log('Deleting record with ID:', id); // Debugging log
     if (id !== undefined) {
-      this.service.delete(id).subscribe(
-        () => {
-        this.loadDetails();
-      },
-    (error)=>{
-      console.error('Error deleting record:', error);
-    });
-    }
-    else {
+      this.service.delete(id).subscribe({
+        next: () => {
+          console.log('Record deleted successfully.');
+          this.loadDetails(); // Reload data after deletion
+        },
+        error: (error) => {
+          console.error('Error deleting record:', error);
+        },
+      });
+    } else {
       console.warn('Invalid ID for deletion.');
     }
   }
-
+  
+  
   // Populate form for editing
   populateForm(record: Yoga): void {
     this.fg.patchValue(record);
