@@ -1,8 +1,29 @@
 table{
-  max-width: 50%;
+  max-width: 60%;
   margin:auto;
   padding: auto;
 }
 .btn-warning{
   margin-right: 5%;
+}
+form .btn{
+  margin-right: 10px;
+  font-weight: bold;
+}
+.incont{
+  width: 50%;
+  padding: 3rem;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+.incont h2{
+  text-align: center; 
+  font-size: 2.5rem;
+}
+.container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  row-gap: 2rem;
+  padding: 2rem;
 }
