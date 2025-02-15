@@ -3,12 +3,6 @@
     <h2 class="my-4">Dashboard</h2>
 
     <!-- Search by Email -->
-    <div class="mb-3">
-      <input type="email" placeholder="Search by email" #emailInput class="form-control d-inline w-75" />
-      <button class="btn btn-secondary d-inline w-20" (click)="searchByEmail(emailInput.value)" style="margin-left: 10px;font-weight:bold;">
-        Search
-      </button>
-    </div>
 
 
 
@@ -16,9 +10,9 @@
     <form [formGroup]="fg" (ngSubmit)="selectedRecord ? update() : add()">
       <div class="mb-3">
         <label for="name" class="form-label">Name</label>
-        <input id="name" type="text" formControlName="username" class="form-control"
-          [ngClass]="{ 'is-invalid': fg.get('username')?.invalid && fg.get('username')?.touched }" />
-        <div *ngIf="fg.get('username')?.invalid && fg.get('username')?.touched" class="invalid-feedback">
+        <input id="name" type="text" formControlName="name" class="form-control"
+          [ngClass]="{ 'is-invalid': fg.get('name')?.invalid && fg.get('name')?.touched }" />
+        <div *ngIf="fg.get('name')?.invalid && fg.get('name')?.touched" class="invalid-feedback">
           Name is required (5-20 characters).
         </div>
       </div>
@@ -58,12 +52,12 @@
     <tbody>
       <tr *ngFor="let d of details; let i = index">
         <th scope="row">{{ i + 1 }}</th>
-        <td>{{ d.username }}</td>
+        <td>{{ d.name }}</td>
         <td>{{ d.email }}</td>
         <td>{{ d.password }}</td>
         <td>
           <button class="btn btn-warning" (click)="populateForm(d)">Edit</button>
-          <button class="btn btn-danger" (click)="deleteByEmail(d.email)">Delete</button>
+          <button class="btn btn-danger" (click)="deleteById(d.id)">Delete</button>
         </td>
       </tr>
     </tbody>
