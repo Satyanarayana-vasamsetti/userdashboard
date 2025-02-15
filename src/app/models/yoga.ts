@@ -1,6 +1,6 @@
 export class Yoga {
   id!:number;
-  username!:string;
+  name!:string;
   src!:string;
   alt!:string;
   button!:string;
